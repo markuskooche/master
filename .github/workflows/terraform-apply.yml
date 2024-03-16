@@ -12,10 +12,27 @@ on:
         required: true
 
 jobs:
- reusable_workflow_job:
-   runs-on: ubuntu-latest
-   environment: production
-   
-   steps:
-     - name: 'bla'
-       run: echo "Test the workflow"
+  reusable-terraform-apply:
+    runs-on: ubuntu-22.04
+    environment: production
+
+    steps:
+      - name: 'Checkout the repository'
+        uses: actions/checkout@v4
+        with:
+          repository: 'markuskooche/master'
+
+      - name: 'Create a new branch called'
+        run: git checkout -b bot/terraform-apply-${{ github.event.repository.id }}
+
+      - name: 'Create the project directory if it does not exist (repo/projects/id)'
+        run: mkdir -p projects/${{ github.event.repository.id }}
+
+      - name: 'Copy the Guartabot configuration to the project directory'
+        run: echo ${{ inputs.config }} > projects/${{ github.event.repository.id }}/config.json
+
+      - name: 'Commit the changes and push to the repository'
+        run: |
+          git add projects/${{ github.event.repository.id }}/config.json
+          git commit -m 'bot(terraform): add configuration'
+          git push origin bot/terraform-apply-${{ github.event.repository.id }}
