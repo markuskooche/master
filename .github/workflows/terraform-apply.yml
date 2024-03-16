@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-22.04
     environment: production
 
+    permissions:
+      contents: write
+
     steps:
       - name: 'Checkout the repository'
         uses: actions/checkout@v4
@@ -31,13 +34,8 @@ jobs:
       - name: 'Copy the Guartabot configuration to the project directory'
         run: echo ${{ inputs.config }} > projects/${{ github.event.repository.id }}/config.json
 
-      - name: 'Set the git username and email'
-        run: |
-          git config --global user.name 'Guartabot'
-          git config --global user.email 'markuskooche@icloud.com'
-
-      - name: 'Commit the changes and push to the repository'
-        run: |
-          git add projects/${{ github.event.repository.id }}/config.json
-          git commit -m 'bot(terraform): add configuration'
-          git push origin bot/terraform-apply-${{ github.event.repository.id }}
+      - name: Commit code formatting fixes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'bot(action): fix code formatting'
+          branch: bot/terraform-apply-${{ github.event.repository.id }}
