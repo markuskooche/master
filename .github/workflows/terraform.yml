@@ -3,50 +3,10 @@ name: Terraform Apply
 on:
   workflow_call:
     inputs:
-      create-space:
-        type: boolean
-        description: 'Whether or not a space bucket should be created for the project.'
-        required: true
-        default: false
-      database-size:
+      config:
         type: string
-        description: 'The size of the database to be created.'
+        description: 'The stringified Guartabot configuration.'
         required: true
-      digitalocean-region:
-        type: string
-        description: 'The region in which the resources should be located.'
-        required: true
-      droplet-backups:
-        type: boolean
-        description: 'Whether or not backups should be enabled for the droplet.'
-        required: true
-        default: false
-      droplet-monitoring:
-        type: boolean
-        description: 'Whether or not monitoring should be enabled for the droplet.'
-        required: true
-        default: false
-      droplet-size:
-        type: string
-        description: 'The size of the droplet to be created.'
-        required: true
-      environment:
-        type: string
-        description: 'The environment for which the resources should be created.'
-        required: true
-      postgres-version:
-        type: string
-        description: 'The postgres version to be installed.'
-        required: true
-      project-name:
-        type: string
-        description: 'The name of the project.'
-        required: true
-      space-force-destroy:
-        type: boolean
-        description: 'Whether or not to force delete a space bucket. (Included files are deleted too.)'
-        required: true
-        default: false
     secrets:
       envPAT:
         required: true
