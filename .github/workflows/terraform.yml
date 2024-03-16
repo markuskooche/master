@@ -1,13 +1,14 @@
 name: Terraform Apply
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      deploy:
-        type: boolean
-        description: 'test'
+      config-path:
         required: true
-        default: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
 
 jobs:
  reusable_workflow_job:
