@@ -3,9 +3,73 @@ name: Terraform Apply
 on:
   workflow_call:
     inputs:
-      config-path:
+      create-database:
+        type: boolean
+        description: 'Whether or not a database should be created for the project.'
         required: true
+        default: false
+      create-space:
+        type: boolean
+        description: 'Whether or not a space bucket should be created for the project.'
+        required: true
+        default: false
+      database-size:
+        type: choice
+        description: 'The size of the database to be created.'
+        required: true
+        options:
+          - 'db-s-1vcpu-1gb'
+      digitalocean-region:
+        type: choice
+        description: 'The region in which the resources should be located.'
+        required: true
+        options:
+          - 'ams3'
+          - 'fra1'
+          - 'sfo3'
+          - 'sgp1'
+          - 'syd1'
+      droplet-backups:
+        type: boolean
+        description: 'Whether or not backups should be enabled for the droplet.'
+        required: true
+        default: false
+      droplet-monitoring:
+        type: boolean
+        description: 'Whether or not monitoring should be enabled for the droplet.'
+        required: true
+        default: false
+      droplet-size:
+        type: choice
+        description: 'The size of the droplet to be created.'
+        required: true
+        options:
+          - 's-1vcpu-512mb-10gb'
+          - 's-1vcpu-1gb'
+      environment:
+        type: choice
+        description: 'The environment for which the resources should be created.'
+        required: true
+        options:
+          - 'staging'
+          - 'production'
+      postgres-version:
+        type: choice
+        description: 'The postgres version to be installed.'
+        required: true
+        options:
+          - 15
+          - 16
+      project-name:
         type: string
+        description: 'The name of the project.'
+        required: true
+        regex: '^([a-z]+-)*[a-z]+$'
+      space-force-destroy:
+        type: boolean
+        description: 'Whether or not to force delete a space bucket. (Included files are deleted too.)'
+        required: true
+        default: false
     secrets:
       envPAT:
         required: true
