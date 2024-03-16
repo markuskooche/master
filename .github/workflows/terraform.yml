@@ -1,0 +1,19 @@
+name: Terraform Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        type: boolean
+        description: 'test'
+        required: true
+        default: true
+
+jobs:
+ reusable_workflow_job:
+   runs-on: ubuntu-latest
+   environment: production
+   
+   steps:
+     - name: 'bla'
+       run: echo "Test the workflow"
