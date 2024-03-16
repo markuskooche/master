@@ -36,3 +36,6 @@ jobs:
         with:
           commit_message: 'bot(action): fix code formatting'
           branch: bot/terraform-apply-${{ github.event.repository.id }}
+          commit_user_name: guartabot
+          commit_user_email: markuskooche@icloud.com
+          commit_author: guartabot <markuskooche@icloud.com>
