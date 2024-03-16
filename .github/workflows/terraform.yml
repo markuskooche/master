@@ -14,21 +14,13 @@ on:
         required: true
         default: false
       database-size:
-        type: choice
+        type: string
         description: 'The size of the database to be created.'
         required: true
-        options:
-          - 'db-s-1vcpu-1gb'
       digitalocean-region:
-        type: choice
+        type: string
         description: 'The region in which the resources should be located.'
         required: true
-        options:
-          - 'ams3'
-          - 'fra1'
-          - 'sfo3'
-          - 'sgp1'
-          - 'syd1'
       droplet-backups:
         type: boolean
         description: 'Whether or not backups should be enabled for the droplet.'
@@ -40,31 +32,21 @@ on:
         required: true
         default: false
       droplet-size:
-        type: choice
+        type: string
         description: 'The size of the droplet to be created.'
         required: true
-        options:
-          - 's-1vcpu-512mb-10gb'
-          - 's-1vcpu-1gb'
       environment:
-        type: choice
+        type: string
         description: 'The environment for which the resources should be created.'
         required: true
-        options:
-          - 'staging'
-          - 'production'
       postgres-version:
-        type: choice
+        type: string
         description: 'The postgres version to be installed.'
         required: true
-        options:
-          - 15
-          - 16
       project-name:
         type: string
         description: 'The name of the project.'
         required: true
-        regex: '^([a-z]+-)*[a-z]+$'
       space-force-destroy:
         type: boolean
         description: 'Whether or not to force delete a space bucket. (Included files are deleted too.)'
