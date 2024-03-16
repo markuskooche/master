@@ -31,6 +31,11 @@ jobs:
       - name: 'Copy the Guartabot configuration to the project directory'
         run: echo ${{ inputs.config }} > projects/${{ github.event.repository.id }}/config.json
 
+      - name: 'Set the git username and email'
+        run: |
+          git config --global user.name 'Guartabot'
+          git config --global user.email 'markuskooche@icloud.com'
+
       - name: 'Commit the changes and push to the repository'
         run: |
           git add projects/${{ github.event.repository.id }}/config.json
