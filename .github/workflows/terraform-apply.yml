@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'markuskooche/master'
-          token: ${{ secrets.PAT }}
 
       - name: 'Create a new branch called'
         run: git checkout -b bot/terraform-apply-${{ github.event.repository.id }}
